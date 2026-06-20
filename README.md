@@ -58,3 +58,7 @@ AND password = 'admin' OR '1'='1';
 Далее необходимо прокинуть порт `kubectl -n exam-k8s port-forward service/exam-web-service 8080:8080` и убедиться, что команда в терминале `curl http://localhost:8080` отдает html-страницу.
 
 Для обновления ресурсов необходимо выполнить `helm upgrade exam-web .`
+
+### Пример работы
+
+![resources](images/exam_k8s_resources.png)
