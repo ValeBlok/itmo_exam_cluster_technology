@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exam-web
+  namespace: exam-k8s
+spec:
+  replicas: {{ Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: exam-web
+  template:
+    metadata:
+      labels:
+        app: exam-web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: {{ Values.service.targetport }}
+          volumeMounts:
+            - name: html-content
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ Values.service.targetport }}
+            initialDelaySeconds: {{ Values.deployment.probes.readiness.initial_delay_seconds }}
+            periodSeconds: {{ Values.deployment.probes.readiness.period_seconds }}
+            timeoutSeconds: {{ Values.deployment.probes.readiness.timeout_seconds }}
+            failureThreshold: {{ Values.deployment.probes.readiness.failure_threshold }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ Values.service.targetport }}
+            initialDelaySeconds: {{ Values.deployment.probes.liveness.initial_delay_seconds }}
+            periodSeconds: {{ Values.deployment.probes.liveness.period_seconds }}
+            timeoutSeconds: {{ Values.deployment.probes.liveness.timeout_seconds }}
+            failureThreshold: {{ Values.deployment.probes.liveness.failure_threshold }}
+          resources:
+            requests:
+              cpu: {{ Values.deployment.resources.requests_cpu }}
+              memory: {{ Values.deployment.resources.requests_memory }}
+            limits:
+              cpu: {{ Values.deployment.resources.limits_cpu }}
+              memory: {{ Values.deployment.resources.limits_memory }}
+      volumes:
+        - name: html-content
+          configMap:
+            name: exam-web-configmap

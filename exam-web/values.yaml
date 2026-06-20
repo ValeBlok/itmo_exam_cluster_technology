@@ -1,0 +1,22 @@
+deployment:
+  replicas: 2
+  resources:
+    requests_cpu: "100m"
+    requests_memory: "64Mi"
+    limits_cpu: "250m"
+    limits_memory: "128Mi"
+  probes:
+    readiness:
+      initial_delay_seconds: 5
+      period_seconds: 10
+      timeout_seconds: 2
+      failure_threshold: 3
+    liveness:
+      initial_delay_seconds: 10
+      period_seconds: 20
+      timeout_seconds: 2
+      failure_threshold: 3
+
+service:
+  port: 8080
+  targetport: 80
