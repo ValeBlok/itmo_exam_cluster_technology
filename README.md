@@ -53,7 +53,7 @@ AND password = 'admin' OR '1'='1';
 
 Перейти в папку exam-web и запустить `helm install exam-web .`
 
-Начнется разворачивание ресурсов. Проверить ресурсы можно так: `kubectl get all -n eaxm-k8s`
+Начнется разворачивание ресурсов. Проверить ресурсы можно так: `kubectl get all -n exam-k8s`
 
 Далее необходимо прокинуть порт `kubectl -n exam-k8s port-forward service/exam-web-service 8080:8080` и убедиться, что команда в терминале `curl http://localhost:8080` отдает html-страницу.
 
