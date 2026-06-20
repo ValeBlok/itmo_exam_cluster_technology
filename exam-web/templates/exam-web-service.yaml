@@ -8,6 +8,6 @@ spec:
   selector:
     app: exam-web
   ports:
-    - port: {{ Values.service.port }}
-      targetPort: {{ Values.service.targetport }}
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetport }}
       protocol: TCP
